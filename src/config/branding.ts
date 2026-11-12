@@ -5,11 +5,6 @@
  * los archivos en /public/images/ (mismo nombre) o editar las rutas de abajo.
  * Si un archivo no existe, <BrandLogo /> muestra un marcador de posición.
  */
-import systemIcon from '@/assets/emi-insight-icon.png.asset.json';
-import emiIcon from '@/assets/emi-castillo-icon.png.asset.json';
-import systemLight from '@/assets/emi-insight-logo-light.png.asset.json';
-import emiColorDark from '@/assets/emi-logo-color-dark.png.asset.json';
-
 export const branding = {
   systemName: 'EMI-INSIGHT',
   systemTagline:
@@ -31,10 +26,10 @@ export const branding = {
   logoEmiCompactWhite: '/images/emi-logo-compact-white.png', // Compacto blanco para fondos oscuros
   logoEmiWhite: '/images/emi-logo-white.png', // Logo EMI completo en blanco (login)
   logoSystem: '/images/emi-insight-logo.png', // Logo del sistema EMI-INSIGHT
-  iconSystem: systemIcon.url,
-  iconEmi: emiIcon.url,
-  logoSystemLight: systemLight.url,
-  logoEmiColorDark: emiColorDark.url,
+  iconSystem: '/images/emi-insight-icon.png', // Ícono del sistema (sidebar)
+  iconEmi: '/images/emi-castillo-icon.png', // Ícono EMI (castillo)
+  logoSystemLight: '/images/emi-insight-logo-light.png', // Logo sistema claro (login oscuro)
+  logoEmiColorDark: '/images/emi-logo-color-dark.png', // Logo EMI a color para fondos oscuros
   loginBackground: '/images/login-bg.jpg', // Fotografía institucional del login
 } as const;
 
