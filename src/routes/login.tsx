@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useEffect, useState, type CSSProperties, type FormEvent } from 'react';
 import {
   AlertCircle,
+  ArrowRight,
   BrainCircuit,
   Clock,
   Eye,
@@ -56,10 +57,10 @@ export const Route = createFileRoute('/login')({
 const RECORDAR_KEY = 'emi_insight_usuario_recordado';
 
 const CARACTERISTICAS = [
-  { icono: Radar, texto: 'Recopilación automatizada de opiniones (Facebook y Google Maps)' },
-  { icono: BrainCircuit, texto: 'Clasificación de polaridad con BETO' },
-  { icono: Network, texto: 'Identificación de factores con BERTopic' },
-  { icono: FileBarChart, texto: 'Dashboards y reportes institucionales en PDF' },
+  { icono: Radar, titulo: 'Recopilación automatizada', detalle: 'Opiniones de Facebook y Google Maps' },
+  { icono: BrainCircuit, titulo: 'Clasificación con BETO', detalle: 'Polaridad positiva, neutral o negativa' },
+  { icono: Network, titulo: 'Factores con BERTopic', detalle: 'Temas que explican la percepción' },
+  { icono: FileBarChart, titulo: 'Dashboards y reportes PDF', detalle: 'Informes institucionales al instante' },
 ];
 
 function LoginPage() {
@@ -81,6 +82,12 @@ function LoginPage() {
   const bloqueado = restantes > 0;
   const puedeEnviar =
     !!usuario.trim() && !!contrasena && captchaValido && !bloqueado && !enviando;
+
+  // Solo en el login: la página no puede desplazarse (se restaura al salir).
+  useEffect(() => {
+    document.documentElement.classList.add('login-lock');
+    return () => document.documentElement.classList.remove('login-lock');
+  }, []);
 
   useEffect(() => {
     const guardado = window.localStorage.getItem(RECORDAR_KEY);
@@ -127,144 +134,171 @@ function LoginPage() {
     setContrasena('');
     setReinicioCaptcha((n) => n + 1);
     if (siguiente.bloqueadoHasta) {
-      setError(`Demasiados intentos fallidos. El acceso se bloqueó temporalmente.`);
+      setError('Demasiados intentos fallidos.');
     } else {
       const quedan = MAX_INTENTOS - siguiente.fallos;
       setError(
-        `${resultado.error ?? 'Error al iniciar sesión.'} Le ${quedan === 1 ? 'queda 1 intento' : `quedan ${quedan} intentos`}.`
+        `${resultado.error ?? 'Error al iniciar sesión.'} ${quedan === 1 ? 'Queda 1 intento' : `Quedan ${quedan} intentos`}.`
       );
     }
   }
 
+  const mensajeAlerta = bloqueado
+    ? `Demasiados intentos fallidos · reintente en ${restantes} s`
+    : error;
+
   return (
-    <div className="flex min-h-screen bg-login-panel">
+    <div className="login-root grid h-dvh w-full grid-cols-1 overflow-hidden bg-login-panel lg:grid-cols-[1.15fr_1fr]">
       {/* PANEL IZQUIERDO — identidad institucional (solo ≥1024px) */}
       <aside
-        className="login-hero relative hidden flex-col justify-between overflow-hidden p-10 text-primary-foreground lg:flex lg:w-[55%] xl:p-14"
+        className="login-hero relative hidden h-full min-h-0 flex-col justify-between overflow-hidden p-[clamp(1.5rem,4.5vh,3.5rem)] text-primary-foreground lg:flex"
         style={{ '--login-bg': `url("${branding.loginBackground}")` } as CSSProperties}
       >
-        <div className="login-enter flex items-center gap-3">
-          <BrandLogo variant="emi" size="md" tone="dark" />
+        {/* Decoración: anillos difuminados y línea dorada del borde derecho */}
+        <div aria-hidden className="login-ring pointer-events-none absolute -right-32 -top-32 h-[28rem] w-[28rem] rounded-full" />
+        <div aria-hidden className="login-ring pointer-events-none absolute -bottom-40 -left-24 h-[32rem] w-[32rem] rounded-full" />
+        <div aria-hidden className="login-gold-edge pointer-events-none absolute inset-y-0 right-0 w-px" />
+
+        {/* 1. ARRIBA */}
+        <div className="login-enter relative flex w-fit items-center gap-3 rounded-2xl border border-primary-foreground/20 bg-primary-foreground/10 py-2 pl-2 pr-4 backdrop-blur-md">
+          <BrandLogo variant="emi" size="sm" tone="dark" className="h-[clamp(36px,5.5vh,44px)] w-[clamp(36px,5.5vh,44px)]" />
           <div className="text-xs leading-snug">
-            <p className="font-semibold">{branding.institutionName}</p>
-            <p className="text-primary-foreground/70">
-              {branding.institutionShort} · {branding.location}
-            </p>
-          </div>
-        </div>
-
-        <div className="login-enter login-enter-delay max-w-xl">
-          <BrandLogo variant="system" size="lg" tone="dark" />
-          <h1 className="mt-6 text-5xl font-bold tracking-[0.12em] xl:text-6xl">
-            {branding.systemName}
-          </h1>
-          <div className="mt-4 h-1 w-24 rounded-full bg-gold" />
-          <p className="mt-5 text-lg leading-relaxed text-primary-foreground/80">
-            {branding.systemTagline}
-          </p>
-          <ul className="mt-10 space-y-4">
-            {CARACTERISTICAS.map(({ icono: Icono, texto }) => (
-              <li key={texto} className="flex items-center gap-4">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/15 text-gold ring-1 ring-gold/30">
-                  <Icono className="h-5 w-5" />
-                </span>
-                <span className="text-sm text-primary-foreground/90">{texto}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="login-enter login-enter-delay-2 flex items-center justify-between text-xs text-primary-foreground/55">
-          <span>{branding.thesisNote}</span>
-          <span>{branding.version}</span>
-        </div>
-      </aside>
-
-      {/* PANEL DERECHO — formulario */}
-      <main className="flex w-full flex-col items-center justify-center px-5 py-10 sm:px-8 lg:w-[45%]">
-        {/* Mini encabezado móvil con el logo EMI */}
-        <div className="mb-8 flex w-full max-w-[420px] items-center gap-3 border-b pb-4 lg:hidden">
-          <BrandLogo variant="emi" size="sm" />
-          <div className="text-xs leading-snug">
-            <p className="font-semibold text-foreground">{branding.institutionNameShort}</p>
-            <p className="text-muted-foreground">
+            <p className="font-semibold">{branding.institutionNameShort}</p>
+            <p className="text-primary-foreground/75">
               {branding.institutionUnit} · {branding.institutionShort}
             </p>
           </div>
         </div>
 
-        <div className="login-enter w-full max-w-[420px]">
-          <div className="emi-card p-7 sm:p-8">
-            <div className="flex items-center gap-3">
-              <BrandLogo variant="system" size="md" />
-              <div>
-                <p className="text-lg font-bold tracking-[0.08em] text-navy">{branding.systemName}</p>
-                <p className="text-xs text-muted-foreground">{branding.systemShortTagline}</p>
-              </div>
+        {/* 2. CENTRO */}
+        <div className="login-enter login-enter-delay relative flex max-w-xl flex-col gap-[clamp(0.75rem,2.4vh,1.75rem)]">
+          <BrandLogo
+            variant="system"
+            size="lg"
+            tone="dark"
+            className="h-[clamp(48px,9vh,96px)] w-[clamp(48px,9vh,96px)] short:h-[clamp(40px,7vh,64px)] short:w-[clamp(40px,7vh,64px)]"
+          />
+          <div>
+            <h1 className="text-[clamp(2rem,3.6vw,3.5rem)] font-bold leading-none tracking-[0.12em]">
+              {branding.systemName}
+            </h1>
+            <div className="mt-[clamp(0.6rem,1.8vh,1rem)] h-1 w-12 rounded-full bg-gold" />
+          </div>
+          <p className="line-clamp-2 max-w-lg text-[clamp(0.9rem,1.15vw,1.1rem)] leading-relaxed text-primary-foreground/80 shorter:hidden">
+            {branding.systemTagline}
+          </p>
+          <ul className="grid grid-cols-2 gap-x-6 gap-y-[clamp(0.6rem,2vh,1.1rem)] pt-[clamp(0rem,1vh,0.5rem)] short:hidden">
+            {CARACTERISTICAS.map(({ icono: Icono, titulo, detalle }) => (
+              <li key={titulo} className="flex min-w-0 items-center gap-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/15 text-gold ring-1 ring-gold/30">
+                  <Icono className="h-[18px] w-[18px]" />
+                </span>
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold">{titulo}</p>
+                  <p className="truncate text-xs text-primary-foreground/70">{detalle}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* 3. ABAJO */}
+        <div className="login-enter login-enter-delay-2 relative flex items-center gap-2.5 text-xs text-primary-foreground/60 shorter:hidden">
+          <span>{branding.thesisNote}</span>
+          <span aria-hidden className="h-1 w-1 rounded-full bg-gold" />
+          <span>{branding.version}</span>
+        </div>
+      </aside>
+
+      {/* PANEL DERECHO — formulario */}
+      <main className="login-form-panel relative flex h-full min-h-0 flex-col items-center justify-center gap-[clamp(0.6rem,2vh,1.25rem)] overflow-y-auto overflow-x-hidden px-5 py-[clamp(0.75rem,2.5vh,2rem)] sm:px-8">
+        <div aria-hidden className="login-blob pointer-events-none absolute left-1/2 top-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 rounded-full" />
+
+        {/* Mini encabezado (<1024px): logos pequeños */}
+        <div className="relative flex w-full max-w-[420px] items-center justify-center gap-3 lg:hidden">
+          <BrandLogo variant="emi" size="sm" />
+          <div className="min-w-0 text-xs leading-snug">
+            <p className="truncate font-semibold text-foreground">{branding.institutionNameShort}</p>
+            <p className="truncate text-muted-foreground">
+              {branding.institutionUnit} · {branding.institutionShort}
+            </p>
+          </div>
+        </div>
+
+        <div className="login-enter relative w-full max-w-[420px]">
+          <div className="login-card relative overflow-hidden rounded-2xl border bg-card p-[clamp(1.25rem,3vh,2rem)]">
+            <div aria-hidden className="login-card-stripe absolute inset-x-0 top-0 h-[3px]" />
+
+            <div className="flex flex-col items-center text-center">
+              <BrandLogo variant="system" size="md" className="h-[clamp(32px,6vh,52px)] w-[clamp(32px,6vh,52px)]" />
+              <h2 className="mt-[clamp(0.4rem,1.2vh,0.75rem)] text-xl font-semibold tracking-tight text-navy xl:text-2xl">
+                Iniciar sesión
+              </h2>
+              <p className="mt-0.5 text-xs text-muted-foreground shorter:hidden">
+                Ingrese sus credenciales institucionales
+              </p>
             </div>
 
-            <h2 className="mt-7 text-2xl font-bold tracking-tight text-navy">Iniciar sesión</h2>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Ingrese sus credenciales institucionales para acceder
-            </p>
-
-            <form onSubmit={onSubmit} className="mt-6" noValidate>
-              <fieldset disabled={bloqueado || enviando} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="usuario">Usuario</Label>
+            <form onSubmit={onSubmit} className="mt-[clamp(0.75rem,2.2vh,1.25rem)]" noValidate>
+              <fieldset disabled={bloqueado || enviando} className="flex flex-col gap-[clamp(0.55rem,1.6vh,1rem)]">
+                <div className="space-y-1.5">
+                  <Label htmlFor="usuario" className="text-xs">Usuario</Label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                    <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
                       id="usuario"
                       placeholder="Ingrese su usuario"
                       value={usuario}
                       onChange={(e) => setUsuario(e.target.value)}
-                      className="h-11 pl-9"
+                      className="h-11 rounded-lg pl-9 transition-shadow duration-200"
                       autoComplete="username"
                     />
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="contrasena">Contraseña</Label>
+                <div className="space-y-1.5">
+                  <Label htmlFor="contrasena" className="text-xs">Contraseña</Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                    <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
                       id="contrasena"
                       type={verContrasena ? 'text' : 'password'}
                       placeholder="Ingrese su contraseña"
                       value={contrasena}
                       onChange={(e) => setContrasena(e.target.value)}
-                      className="h-11 pl-9 pr-10"
+                      className="h-11 rounded-lg pl-9 pr-10 transition-shadow duration-200"
                       autoComplete="current-password"
                     />
                     <button
                       type="button"
                       onClick={() => setVerContrasena((v) => !v)}
                       aria-label={verContrasena ? 'Ocultar contraseña' : 'Mostrar contraseña'}
-                      className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-md text-muted-foreground transition-colors duration-200 hover:bg-secondary hover:text-foreground"
+                      className="absolute right-1.5 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-md text-muted-foreground transition-colors duration-200 hover:bg-secondary hover:text-foreground"
                     >
                       {verContrasena ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
                   </div>
                 </div>
 
-                <Captcha
-                  onValidChange={setCaptchaValido}
-                  onIncorrecto={() => setError('Código captcha incorrecto. Ingrese el nuevo código.')}
-                  reinicio={reinicioCaptcha}
-                  disabled={bloqueado || enviando}
-                />
+                <div className="login-captcha">
+                  <Captcha
+                    compacto
+                    onValidChange={setCaptchaValido}
+                    onIncorrecto={() => setError('Código captcha incorrecto · se generó uno nuevo.')}
+                    reinicio={reinicioCaptcha}
+                    disabled={bloqueado || enviando}
+                  />
+                </div>
 
-                <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 pt-1">
-                  <label className="flex cursor-pointer items-center gap-2 whitespace-nowrap text-sm text-foreground">
+                <div className="flex items-center justify-between gap-3 text-xs">
+                  <label className="flex cursor-pointer items-center gap-2 whitespace-nowrap text-foreground">
                     <Checkbox checked={recordar} onCheckedChange={(v) => setRecordar(v === true)} />
                     Recordar usuario
                   </label>
                   <button
                     type="button"
                     onClick={() => setOlvidoAbierto(true)}
-                    className="whitespace-nowrap text-sm font-medium text-accent underline-offset-2 hover:underline"
+                    className="whitespace-nowrap font-medium text-accent underline-offset-2 transition-colors duration-200 hover:underline"
                   >
                     ¿Olvidó su contraseña?
                   </button>
@@ -273,7 +307,7 @@ function LoginPage() {
                 <Button
                   type="submit"
                   disabled={!puedeEnviar}
-                  className="emi-btn-primary h-11 w-full rounded-xl font-semibold"
+                  className="emi-btn-primary group h-11 w-full rounded-lg font-semibold"
                 >
                   {enviando ? (
                     <>
@@ -281,44 +315,41 @@ function LoginPage() {
                       Verificando...
                     </>
                   ) : (
-                    'Ingresar'
+                    <>
+                      Ingresar
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+                    </>
                   )}
                 </Button>
               </fieldset>
             </form>
 
-            {(error || bloqueado) && (
-              <div
-                role="alert"
-                className="mt-4 flex items-start gap-2.5 rounded-lg border border-destructive/25 bg-destructive/10 px-3 py-2.5 text-sm text-destructive"
-              >
-                {bloqueado ? (
-                  <Clock className="mt-0.5 h-4 w-4 shrink-0" />
-                ) : (
-                  <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
-                )}
-                <div>
-                  {error && <p>{error}</p>}
-                  {bloqueado && (
-                    <p className="font-semibold">
-                      Intente nuevamente en {restantes} segundo{restantes === 1 ? '' : 's'}.
-                    </p>
+            {/* Espacio reservado para la alerta: no desplaza el formulario */}
+            <div className="relative mt-2 h-9" aria-live="assertive">
+              {mensajeAlerta && (
+                <div
+                  role="alert"
+                  title={mensajeAlerta}
+                  className="absolute inset-0 flex items-center gap-2 rounded-lg border border-destructive/25 bg-destructive/10 px-3 text-xs text-destructive"
+                >
+                  {bloqueado ? (
+                    <Clock className="h-4 w-4 shrink-0" />
+                  ) : (
+                    <AlertCircle className="h-4 w-4 shrink-0" />
                   )}
+                  <span className="line-clamp-2 leading-tight">{mensajeAlerta}</span>
                 </div>
-              </div>
-            )}
-          </div>
-
-          <div className="mt-6 space-y-1.5 text-center text-xs text-muted-foreground">
-            <p>
-              <ShieldCheck className="mr-1 inline h-3.5 w-3.5 align-[-2px]" />
-              Acceso restringido a personal autorizado. Toda actividad es registrada.
-            </p>
-            <p>
-              © {branding.year} {branding.systemName} · {branding.institutionShort}
-            </p>
+              )}
+            </div>
           </div>
         </div>
+
+        <p className="relative flex w-full max-w-[420px] items-center justify-center gap-1.5 truncate text-[11px] text-muted-foreground shorter:hidden">
+          <ShieldCheck className="h-3.5 w-3.5 shrink-0" />
+          <span className="truncate">
+            Acceso restringido a personal autorizado · © {branding.year} {branding.systemName}
+          </span>
+        </p>
       </main>
 
       <Dialog open={olvidoAbierto} onOpenChange={setOlvidoAbierto}>

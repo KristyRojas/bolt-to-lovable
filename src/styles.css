@@ -10,6 +10,9 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+/* Variantes por ALTURA de ventana (login sin scroll) */
+@custom-variant short (@media (max-height: 760px));
+@custom-variant shorter (@media (max-height: 640px));
 
 /*
  * Design system definition.
@@ -122,8 +125,12 @@
   --skeleton-a: oklch(0.936 0.012 264.5);
   --skeleton-b: oklch(0.969 0.007 260.7);
   --login-panel: oklch(0.984 0.003 247.9);
-  --login-overlay-from: oklch(0.264 0.068 255.3 / 0.92);
-  --login-overlay-to: oklch(0.316 0.085 257.8 / 0.8);
+  --login-overlay-from: oklch(0.264 0.068 255.3 / 0.96);
+  --login-overlay-mid: oklch(0.316 0.085 257.8 / 0.9);
+  --login-overlay-to: oklch(0.569 0.202 259.7 / 0.6);
+  --login-grid: oklch(1 0 0 / 0.06);
+  --login-glow: oklch(0.728 0.138 89.7 / 0.12);
+  --shadow-login-card: 0 20px 25px -5px oklch(0.208 0.042 265.8 / 0.05), 0 8px 10px -6px oklch(0.208 0.042 265.8 / 0.05);
   --sidebar-line: oklch(1 0 0 / 0.1);
   --sidebar-muted: oklch(0.72 0.04 256);
   --sidebar-card: oklch(1 0 0 / 0.05);
@@ -217,22 +224,51 @@
   opacity: 0.85;
 }
 
-/* Login: foto institucional + degradado azul marino + patrón de puntos */
+/* Login: foto institucional + degradado diagonal + cuadrícula + resplandor dorado */
+html.login-lock,
+html.login-lock body {
+  height: 100%;
+  overflow: hidden;
+}
 .login-hero {
   background-color: var(--emi-navy);
   background-image:
-    radial-gradient(oklch(1 0 0 / 0.07) 1px, transparent 1px),
-    linear-gradient(135deg, var(--login-overlay-from) 0%, var(--login-overlay-to) 100%),
+    radial-gradient(circle at 100% 100%, var(--login-glow) 0%, transparent 45%),
+    linear-gradient(var(--login-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--login-grid) 1px, transparent 1px),
+    linear-gradient(135deg, var(--login-overlay-from) 0%, var(--login-overlay-mid) 55%, var(--login-overlay-to) 100%),
     var(--login-bg, none);
-  background-size: 22px 22px, cover, cover;
-  background-position: 0 0, center, center;
+  background-size: cover, 32px 32px, 32px 32px, cover, cover;
+  background-position: center, 0 0, 0 0, center, center;
+}
+.login-ring {
+  border: 1px solid oklch(1 0 0 / 0.1);
+  background: radial-gradient(circle, oklch(1 0 0 / 0.05) 0%, transparent 70%);
+  filter: blur(1px);
+}
+.login-gold-edge {
+  background: linear-gradient(180deg, transparent, var(--emi-gold) 30%, var(--emi-gold) 70%, transparent);
+  opacity: 0.7;
+}
+.login-form-panel {
+  background: linear-gradient(160deg, var(--login-panel) 0%, var(--background) 100%);
+}
+.login-blob {
+  background: radial-gradient(circle, color-mix(in oklab, var(--emi-blue) 14%, transparent) 0%, transparent 70%);
+  filter: blur(40px);
+}
+.login-card {
+  box-shadow: var(--shadow-login-card);
+}
+.login-card-stripe {
+  background: linear-gradient(90deg, var(--emi-blue), var(--emi-gold));
 }
 @keyframes login-enter {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .login-enter {
-  animation: login-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: login-enter 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .login-enter-delay { animation-delay: 0.12s; }
 .login-enter-delay-2 { animation-delay: 0.24s; }
