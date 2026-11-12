@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { branding } from '@/config/branding';
 import { cn } from '@/lib/utils';
 
-type Variante = 'emi' | 'system';
+type Variante = 'emi' | 'system' | 'systemIcon' | 'emiIcon' | 'systemLight' | 'emiColorDark';
 type Tamano = 'sm' | 'md' | 'lg';
 
 const TAMANOS: Record<Tamano, string> = {
@@ -30,6 +30,26 @@ const FUENTES: Record<Variante, { src: string; alt: string; placeholder: string 
     src: branding.logoSystem,
     alt: `Logo del sistema ${branding.systemName}`,
     placeholder: 'LOGO EMI-INSIGHT',
+  },
+  systemIcon: {
+    src: branding.iconSystem,
+    alt: `Ícono del sistema ${branding.systemName}`,
+    placeholder: 'EMI-INSIGHT',
+  },
+  emiIcon: {
+    src: branding.iconEmi,
+    alt: `Ícono de la ${branding.institutionName}`,
+    placeholder: 'EMI',
+  },
+  systemLight: {
+    src: branding.logoSystemLight,
+    alt: `Logo del sistema ${branding.systemName}`,
+    placeholder: 'EMI-INSIGHT',
+  },
+  emiColorDark: {
+    src: branding.logoEmiColorDark,
+    alt: `Logo de la ${branding.institutionName}`,
+    placeholder: 'EMI',
   },
 };
 

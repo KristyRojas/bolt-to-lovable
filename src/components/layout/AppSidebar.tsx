@@ -29,7 +29,7 @@ export function AppSidebar({
           colapsado ? 'h-20 justify-center px-2' : 'gap-3 px-5 py-5'
         )}
       >
-        <BrandLogo variant="system" size={colapsado ? 'sm' : 'md'} tone="dark" />
+        <BrandLogo variant="systemIcon" size="sm" tone="dark" className="h-9 w-auto" />
         {!colapsado && (
           <div className="min-w-0">
             <p className="truncate text-base font-bold tracking-[0.08em]">{branding.systemName}</p>
@@ -117,12 +117,7 @@ export function AppSidebar({
             <span className="whitespace-nowrap text-[10px] uppercase tracking-[0.12em] text-sidebar-muted">
               Respaldado por
             </span>
-            {/* Logo EMI compacto en blanco, visible sobre el azul marino */}
-            <img
-              src={branding.logoEmiCompactWhite}
-              alt={`Logo de la ${branding.institutionName}`}
-              className="h-9 w-auto max-w-full object-contain"
-            />
+            <BrandLogo variant="emiIcon" size="sm" tone="dark" className="h-6 w-auto" />
             <span className="whitespace-nowrap text-xs font-semibold">{branding.institutionShort}</span>
           </div>
         )}

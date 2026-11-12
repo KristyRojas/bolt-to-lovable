@@ -263,6 +263,26 @@ html.login-lock body {
 .login-card-stripe {
   background: linear-gradient(90deg, var(--emi-blue), var(--emi-gold));
 }
+.login-system-logo {
+  max-width: 100%;
+  object-position: left center;
+}
+@media (min-width: 900px) and (max-width: 1023px) {
+  .login-root { grid-template-columns: 1fr 1fr; }
+  .login-hero { display: flex; }
+  .login-form-panel > div:first-of-type { display: none; }
+}
+@media (max-height: 760px) {
+  .login-system-description { font-size: 1rem; line-height: 1.5; }
+  .login-hero li > span { width: 2rem; height: 2rem; }
+}
+@media (max-height: 540px) {
+  .login-card { padding: 1rem 1.25rem; }
+  .login-card input,
+  .login-card button[type="submit"] { height: 2.375rem; }
+  .login-card fieldset { gap: 0.5rem; }
+  .login-card form { margin-top: 0.625rem; }
+}
 @keyframes login-enter {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
