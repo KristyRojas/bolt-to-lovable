@@ -33,5 +33,7 @@ use the editor.
 
 - App data (users, sources, reports, NLP results) lives in browser localStorage via `src/services/*`; pages talk only to contexts/services so a future backend swap touches services alone. Why: ported as-is from the Bolt prototype, which had no backend.
 - PDF generation (`src/lib/pdf.ts`, jsPDF) is loaded with dynamic `import()` inside click handlers, never statically from a route. Why: jsPDF is browser-only and routes are server-rendered.
-- Pages behind login wrap their content in `AppLayout` (AuthGuard + role-filtered sidebar). Why: auth state is read from localStorage after hydration, so guarding happens client-side.
+- Pages behind login wrap their content in `AppLayout` (AuthGuard + AppSidebar/AppHeader/AppFooter); sidebar items and header breadcrumbs both come from `src/components/layout/navegacion.ts`. Why: auth state is read from localStorage after hydration, so guarding happens client-side, and one menu list keeps role filtering and breadcrumbs in sync.
+- System/institution names, version and logo/background paths live only in `src/config/branding.ts`; images render through `BrandLogo`, which shows a placeholder when the file is missing. Why: the institution swaps logos by replacing files in `public/images/` without code changes.
+- Login captcha and lockout rules are pure functions in `src/lib/login-seguridad.ts` (tested); the captcha is client-side only. Why: keeps the rules testable and makes a later swap to a server-verified captcha local.
 - Report content for PDF, CSV and the on-screen preview comes from one builder (`src/lib/reporte-datos.ts`) over the filtered opinions from `analisis.service`. Why: every output shows the same numbers for the same source and period.
