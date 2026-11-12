@@ -10,33 +10,167 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BuscarRouteImport } from './routes/buscar'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as FuentesRouteImport } from './routes/fuentes'
+import { Route as HistorialRouteImport } from './routes/historial'
+import { Route as InformesRouteImport } from './routes/informes'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as PlnRouteImport } from './routes/pln'
+import { Route as ReportesRouteImport } from './routes/reportes'
+import { Route as ScrapingRouteImport } from './routes/scraping'
+import { Route as UsuariosRouteImport } from './routes/usuarios'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BuscarRoute = BuscarRouteImport.update({
+  id: '/buscar',
+  path: '/buscar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FuentesRoute = FuentesRouteImport.update({
+  id: '/fuentes',
+  path: '/fuentes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistorialRoute = HistorialRouteImport.update({
+  id: '/historial',
+  path: '/historial',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InformesRoute = InformesRouteImport.update({
+  id: '/informes',
+  path: '/informes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlnRoute = PlnRouteImport.update({
+  id: '/pln',
+  path: '/pln',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportesRoute = ReportesRouteImport.update({
+  id: '/reportes',
+  path: '/reportes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScrapingRoute = ScrapingRouteImport.update({
+  id: '/scraping',
+  path: '/scraping',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UsuariosRoute = UsuariosRouteImport.update({
+  id: '/usuarios',
+  path: '/usuarios',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/buscar': typeof BuscarRoute
+  '/dashboard': typeof DashboardRoute
+  '/fuentes': typeof FuentesRoute
+  '/historial': typeof HistorialRoute
+  '/informes': typeof InformesRoute
+  '/login': typeof LoginRoute
+  '/pln': typeof PlnRoute
+  '/reportes': typeof ReportesRoute
+  '/scraping': typeof ScrapingRoute
+  '/usuarios': typeof UsuariosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/buscar': typeof BuscarRoute
+  '/dashboard': typeof DashboardRoute
+  '/fuentes': typeof FuentesRoute
+  '/historial': typeof HistorialRoute
+  '/informes': typeof InformesRoute
+  '/login': typeof LoginRoute
+  '/pln': typeof PlnRoute
+  '/reportes': typeof ReportesRoute
+  '/scraping': typeof ScrapingRoute
+  '/usuarios': typeof UsuariosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/buscar': typeof BuscarRoute
+  '/dashboard': typeof DashboardRoute
+  '/fuentes': typeof FuentesRoute
+  '/historial': typeof HistorialRoute
+  '/informes': typeof InformesRoute
+  '/login': typeof LoginRoute
+  '/pln': typeof PlnRoute
+  '/reportes': typeof ReportesRoute
+  '/scraping': typeof ScrapingRoute
+  '/usuarios': typeof UsuariosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/buscar'
+    | '/dashboard'
+    | '/fuentes'
+    | '/historial'
+    | '/informes'
+    | '/login'
+    | '/pln'
+    | '/reportes'
+    | '/scraping'
+    | '/usuarios'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/buscar'
+    | '/dashboard'
+    | '/fuentes'
+    | '/historial'
+    | '/informes'
+    | '/login'
+    | '/pln'
+    | '/reportes'
+    | '/scraping'
+    | '/usuarios'
+  id:
+    | '__root__'
+    | '/'
+    | '/buscar'
+    | '/dashboard'
+    | '/fuentes'
+    | '/historial'
+    | '/informes'
+    | '/login'
+    | '/pln'
+    | '/reportes'
+    | '/scraping'
+    | '/usuarios'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BuscarRoute: typeof BuscarRoute
+  DashboardRoute: typeof DashboardRoute
+  FuentesRoute: typeof FuentesRoute
+  HistorialRoute: typeof HistorialRoute
+  InformesRoute: typeof InformesRoute
+  LoginRoute: typeof LoginRoute
+  PlnRoute: typeof PlnRoute
+  ReportesRoute: typeof ReportesRoute
+  ScrapingRoute: typeof ScrapingRoute
+  UsuariosRoute: typeof UsuariosRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +182,91 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/buscar': {
+      id: '/buscar'
+      path: '/buscar'
+      fullPath: '/buscar'
+      preLoaderRoute: typeof BuscarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fuentes': {
+      id: '/fuentes'
+      path: '/fuentes'
+      fullPath: '/fuentes'
+      preLoaderRoute: typeof FuentesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/historial': {
+      id: '/historial'
+      path: '/historial'
+      fullPath: '/historial'
+      preLoaderRoute: typeof HistorialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/informes': {
+      id: '/informes'
+      path: '/informes'
+      fullPath: '/informes'
+      preLoaderRoute: typeof InformesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pln': {
+      id: '/pln'
+      path: '/pln'
+      fullPath: '/pln'
+      preLoaderRoute: typeof PlnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reportes': {
+      id: '/reportes'
+      path: '/reportes'
+      fullPath: '/reportes'
+      preLoaderRoute: typeof ReportesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scraping': {
+      id: '/scraping'
+      path: '/scraping'
+      fullPath: '/scraping'
+      preLoaderRoute: typeof ScrapingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/usuarios': {
+      id: '/usuarios'
+      path: '/usuarios'
+      fullPath: '/usuarios'
+      preLoaderRoute: typeof UsuariosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BuscarRoute: BuscarRoute,
+  DashboardRoute: DashboardRoute,
+  FuentesRoute: FuentesRoute,
+  HistorialRoute: HistorialRoute,
+  InformesRoute: InformesRoute,
+  LoginRoute: LoginRoute,
+  PlnRoute: PlnRoute,
+  ReportesRoute: ReportesRoute,
+  ScrapingRoute: ScrapingRoute,
+  UsuariosRoute: UsuariosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
