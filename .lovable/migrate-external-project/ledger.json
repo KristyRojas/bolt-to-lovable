@@ -1,0 +1,90 @@
+{
+  "source": "bolt",
+  "artifact": "bolt-to-lovable-main.zip (TanStack Start + shadcn/ui, browser-only prototype)",
+  "capabilities": [
+    {
+      "capability": "code",
+      "source": "src/routes, components, contexts, services",
+      "outcome": "copied as-is (same framework and versions)",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "theme",
+      "source": "src/styles.css + Inter font link",
+      "outcome": "copied as-is",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "schema",
+      "source": "none (no database, no migrations)",
+      "outcome": "not applicable until data moves to Lovable Cloud",
+      "status": "pending",
+      "next_action": "user decides whether to move data to Lovable Cloud"
+    },
+    {
+      "capability": "records",
+      "source": "browser localStorage demo data seeded from code (fuentes, usuarios, reportes, PLN results)",
+      "outcome": "preserved browser-local demo data",
+      "status": "verified",
+      "next_action": "optional: move to Lovable Cloud for shared data"
+    },
+    {
+      "capability": "auth identities",
+      "source": "6 demo accounts in src/data/usuarios.ts (username + password in code, no emails)",
+      "outcome": "preserved demo sign-in",
+      "status": "pending",
+      "next_action": "user decides on real Lovable Cloud accounts; needs an email per account"
+    },
+    {
+      "capability": "authorization",
+      "source": "client-side role menu filtering (superadministrador/administrador/usuario)",
+      "outcome": "preserved",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "reports export",
+      "source": "jsPDF + jspdf-autotable, CSV",
+      "outcome": "preserved; PDF download confirmed in browser",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "uploaded file bytes",
+      "source": "none",
+      "outcome": "not applicable",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "external providers / webhooks / schedules / public endpoints",
+      "source": "none (scraping and NLP simulated in browser)",
+      "outcome": "not applicable",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "secrets",
+      "source": "no environment variables referenced",
+      "outcome": "not applicable",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "cutover",
+      "source": "previous host",
+      "outcome": "publish from Lovable",
+      "status": "pending",
+      "next_action": "user publishes"
+    },
+    {
+      "capability": "verification",
+      "source": "-",
+      "outcome": "11 tests pass; signed in as demo admin, all 9 pages load with no errors, PDF report downloads",
+      "status": "verified",
+      "next_action": "none"
+    }
+  ]
+}

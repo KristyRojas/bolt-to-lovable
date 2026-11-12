@@ -1,23 +1,35 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { useEffect } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
 
-// The home route ships no og:image, so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
+
+export const Route = createFileRoute('/')({
+  head: () => ({
+    meta: [
+      { title: 'PercepciónEMI — Percepción institucional EMI-UALP' },
+      { name: 'description', content: 'Sistema de identificación de factores de percepción institucional en redes sociales — EMI-UALP, Bolivia' },
+      { property: 'og:title', content: 'PercepciónEMI — Percepción institucional EMI-UALP' },
+      { property: 'og:description', content: 'Sistema de identificación de factores de percepción institucional en redes sociales — EMI-UALP, Bolivia' },
+      { property: 'og:type', content: 'website' },
+      { name: 'twitter:card', content: 'summary' },
+    ],
+  }),
+  component: Home,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Home() {
+  const { usuario, cargando } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!cargando) {
+      navigate({ to: usuario ? '/dashboard' : '/login', replace: true });
+    }
+  }, [cargando, usuario, navigate]);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="flex min-h-screen items-center justify-center bg-background">
+      <div className="emi-skeleton h-8 w-48" />
     </div>
   );
 }
