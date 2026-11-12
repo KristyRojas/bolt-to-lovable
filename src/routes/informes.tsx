@@ -17,9 +17,9 @@ import { getAnalisisConsolidado } from '@/services/analisis.service';
 export const Route = createFileRoute('/informes')({
   head: () => ({
     meta: [
-      { title: 'Informes y reportes — PercepciónEMI' },
+      { title: 'Informes y reportes — EMI-INSIGHT' },
       { name: 'description', content: 'Punto de partida para consultar y generar reportes de percepción.' },
-      { property: 'og:title', content: 'Informes y reportes — PercepciónEMI' },
+      { property: 'og:title', content: 'Informes y reportes — EMI-INSIGHT' },
       { property: 'og:description', content: 'Punto de partida para consultar y generar reportes de percepción.' },
       { property: 'og:type', content: 'website' },
       { name: 'twitter:card', content: 'summary' },

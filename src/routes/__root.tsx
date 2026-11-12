@@ -85,14 +85,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "PercepciónEMI" },
+      { title: "EMI-INSIGHT" },
       {
         name: "description",
         content:
           "Sistema de identificación de factores de percepción institucional en redes sociales — EMI-UALP, Bolivia",
       },
       { name: "author", content: "EMI-UALP" },
-      { property: "og:title", content: "PercepciónEMI" },
+      { property: "og:title", content: "EMI-INSIGHT" },
       {
         property: "og:description",
         content: "Sistema de percepción institucional en redes sociales — EMI-UALP, Bolivia",

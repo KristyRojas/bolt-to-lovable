@@ -30,9 +30,9 @@ import { contenidoReporte, filasCsv, nombreArchivo, SECCIONES_REPORTE } from '@/
 export const Route = createFileRoute('/reportes')({
   head: () => ({
     meta: [
-      { title: 'Generar reportes — PercepciónEMI' },
+      { title: 'Generar reportes — EMI-INSIGHT' },
       { name: 'description', content: 'Cree reportes PDF o CSV con diseño institucional.' },
-      { property: 'og:title', content: 'Generar reportes — PercepciónEMI' },
+      { property: 'og:title', content: 'Generar reportes — EMI-INSIGHT' },
       { property: 'og:description', content: 'Cree reportes PDF o CSV con diseño institucional.' },
       { property: 'og:type', content: 'website' },
       { name: 'twitter:card', content: 'summary' },

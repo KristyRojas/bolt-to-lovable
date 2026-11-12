@@ -6,9 +6,9 @@ import { useAuth } from '@/contexts/AuthContext';
 export const Route = createFileRoute('/')({
   head: () => ({
     meta: [
-      { title: 'PercepciónEMI — Percepción institucional EMI-UALP' },
+      { title: 'EMI-INSIGHT — Percepción institucional EMI-UALP' },
       { name: 'description', content: 'Sistema de identificación de factores de percepción institucional en redes sociales — EMI-UALP, Bolivia' },
-      { property: 'og:title', content: 'PercepciónEMI — Percepción institucional EMI-UALP' },
+      { property: 'og:title', content: 'EMI-INSIGHT — Percepción institucional EMI-UALP' },
       { property: 'og:description', content: 'Sistema de identificación de factores de percepción institucional en redes sociales — EMI-UALP, Bolivia' },
       { property: 'og:type', content: 'website' },
       { name: 'twitter:card', content: 'summary' },

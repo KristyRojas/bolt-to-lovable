@@ -13,9 +13,9 @@ import { ShieldAlert } from 'lucide-react';
 export const Route = createFileRoute('/usuarios')({
   head: () => ({
     meta: [
-      { title: 'Gestión de usuarios — PercepciónEMI' },
+      { title: 'Gestión de usuarios — EMI-INSIGHT' },
       { name: 'description', content: 'Cree, edite y administre las cuentas del sistema.' },
-      { property: 'og:title', content: 'Gestión de usuarios — PercepciónEMI' },
+      { property: 'og:title', content: 'Gestión de usuarios — EMI-INSIGHT' },
       { property: 'og:description', content: 'Cree, edite y administre las cuentas del sistema.' },
       { property: 'og:type', content: 'website' },
       { name: 'twitter:card', content: 'summary' },

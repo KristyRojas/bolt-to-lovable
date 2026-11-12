@@ -13,9 +13,9 @@ import type { Rol } from '@/types';
 export const Route = createFileRoute('/fuentes')({
   head: () => ({
     meta: [
-      { title: 'Fuentes de datos — PercepciónEMI' },
+      { title: 'Fuentes de datos — EMI-INSIGHT' },
       { name: 'description', content: 'Gestione las fuentes de Facebook y Google Maps a recopilar.' },
-      { property: 'og:title', content: 'Fuentes de datos — PercepciónEMI' },
+      { property: 'og:title', content: 'Fuentes de datos — EMI-INSIGHT' },
       { property: 'og:description', content: 'Gestione las fuentes de Facebook y Google Maps a recopilar.' },
       { property: 'og:type', content: 'website' },
       { name: 'twitter:card', content: 'summary' },

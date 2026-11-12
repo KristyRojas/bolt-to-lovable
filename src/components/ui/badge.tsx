@@ -15,6 +15,9 @@ const badgeVariants = cva(
         destructive:
           'border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80',
         outline: 'text-foreground',
+        rolSuper: 'border-gold/60 bg-navy text-primary-foreground',
+        rolAdmin: 'border-transparent bg-emiblue text-primary-foreground',
+        rolUsuario: 'border-transparent bg-muted text-muted-foreground',
       },
     },
     defaultVariants: {

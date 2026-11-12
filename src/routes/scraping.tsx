@@ -32,9 +32,9 @@ import type { Rol } from '@/types';
 export const Route = createFileRoute('/scraping')({
   head: () => ({
     meta: [
-      { title: 'Recopilación de opiniones — PercepciónEMI' },
+      { title: 'Recopilación de opiniones — EMI-INSIGHT' },
       { name: 'description', content: 'Recopile opiniones desde las fuentes activas.' },
-      { property: 'og:title', content: 'Recopilación de opiniones — PercepciónEMI' },
+      { property: 'og:title', content: 'Recopilación de opiniones — EMI-INSIGHT' },
       { property: 'og:description', content: 'Recopile opiniones desde las fuentes activas.' },
       { property: 'og:type', content: 'website' },
       { name: 'twitter:card', content: 'summary' },

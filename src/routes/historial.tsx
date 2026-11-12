@@ -30,9 +30,9 @@ import { contenidoReporte, etiquetaSeccion, filasCsv, nombreArchivo } from '@/li
 export const Route = createFileRoute('/historial')({
   head: () => ({
     meta: [
-      { title: 'Historial de reportes — PercepciónEMI' },
+      { title: 'Historial de reportes — EMI-INSIGHT' },
       { name: 'description', content: 'Revise, descargue o elimine los reportes generados.' },
-      { property: 'og:title', content: 'Historial de reportes — PercepciónEMI' },
+      { property: 'og:title', content: 'Historial de reportes — EMI-INSIGHT' },
       { property: 'og:description', content: 'Revise, descargue o elimine los reportes generados.' },
       { property: 'og:type', content: 'website' },
       { name: 'twitter:card', content: 'summary' },
