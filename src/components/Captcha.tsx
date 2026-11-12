@@ -193,21 +193,21 @@ export function Captcha({
           />
         )}
       </div>
-      <div id="captcha-ayuda" className="flex items-center justify-between text-xs" aria-live="polite">
+      <div id="captcha-ayuda" className="flex items-center justify-between gap-3 text-xs" aria-live="polite">
         {error ? (
           <span className="font-medium text-destructive">{error}. Se generó un nuevo código.</span>
         ) : valido ? (
           <span className="font-medium text-sentiment-positive">Código verificado</span>
         ) : (
-          <span className="text-muted-foreground">No distingue mayúsculas de minúsculas.</span>
+          <span className="text-muted-foreground">No distingue mayúsculas.</span>
         )}
         <button
           type="button"
           onClick={() => regenerar()}
           disabled={disabled}
-          className="text-accent underline-offset-2 hover:underline disabled:opacity-50"
+          className="shrink-0 text-accent underline-offset-2 hover:underline disabled:opacity-50"
         >
-          ¿No se lee? Generar otro
+          Generar otro código
         </button>
       </div>
     </div>

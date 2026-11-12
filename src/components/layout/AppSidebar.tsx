@@ -114,14 +114,14 @@ export function AppSidebar({
         </div>
         {!colapsado && (
           <div className="mt-4 flex items-center gap-3 px-1">
-            <span className="text-[10px] uppercase tracking-[0.12em] text-sidebar-muted">
+            <span className="whitespace-nowrap text-[10px] uppercase tracking-[0.12em] text-sidebar-muted">
               Respaldado por
             </span>
             <span className="rounded-lg bg-card p-1">
               {/* Logo EMI sobre fondo blanco para que se vea sobre el azul marino */}
               <BrandLogo variant="emi" size="sm" className="h-7 w-7" />
             </span>
-            <span className="text-xs font-semibold">{branding.institutionShort}</span>
+            <span className="whitespace-nowrap text-xs font-semibold">{branding.institutionShort}</span>
           </div>
         )}
       </div>

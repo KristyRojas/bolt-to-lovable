@@ -257,14 +257,14 @@ function LoginPage() {
                 />
 
                 <div className="flex items-center justify-between gap-3 pt-1">
-                  <label className="flex cursor-pointer items-center gap-2 text-sm text-foreground">
+                  <label className="flex cursor-pointer items-center gap-2 whitespace-nowrap text-sm text-foreground">
                     <Checkbox checked={recordar} onCheckedChange={(v) => setRecordar(v === true)} />
                     Recordar usuario
                   </label>
                   <button
                     type="button"
                     onClick={() => setOlvidoAbierto(true)}
-                    className="text-sm font-medium text-accent underline-offset-2 hover:underline"
+                    className="whitespace-nowrap text-sm font-medium text-accent underline-offset-2 hover:underline"
                   >
                     ¿Olvidó su contraseña?
                   </button>
@@ -310,8 +310,8 @@ function LoginPage() {
           </div>
 
           <div className="mt-6 space-y-1.5 text-center text-xs text-muted-foreground">
-            <p className="flex items-center justify-center gap-1.5">
-              <ShieldCheck className="h-3.5 w-3.5" />
+            <p>
+              <ShieldCheck className="mr-1 inline h-3.5 w-3.5 align-[-2px]" />
               Acceso restringido a personal autorizado. Toda actividad es registrada.
             </p>
             <p>

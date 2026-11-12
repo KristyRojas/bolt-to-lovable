@@ -65,11 +65,11 @@ export function AppHeader({ onMenu }: { onMenu: () => void }) {
     <header className="app-header sticky top-0 z-30 h-16 border-b-2 border-gold bg-card">
       <div className="flex h-full items-center gap-3 px-3 sm:px-5">
         <Button
-          variant="ghost"
+          variant="header"
           size="icon"
           onClick={onMenu}
           aria-label="Mostrar u ocultar el menú"
-          className="shrink-0 text-navy"
+          className="shrink-0"
         >
           <Menu className="h-5 w-5" />
         </Button>
@@ -111,7 +111,7 @@ export function AppHeader({ onMenu }: { onMenu: () => void }) {
 
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="ghost" size="icon" className="relative text-navy" aria-label={`Notificaciones (${noLeidas} sin leer)`}>
+              <Button variant="header" size="icon" className="relative" aria-label={`Notificaciones (${noLeidas} sin leer)`}>
                 <Bell className="h-5 w-5" />
                 {noLeidas > 0 && (
                   <span className="absolute right-1 top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-destructive px-1 text-[10px] font-bold text-destructive-foreground">
@@ -151,7 +151,7 @@ export function AppHeader({ onMenu }: { onMenu: () => void }) {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="flex items-center gap-2.5 rounded-xl px-1.5 py-1 transition-colors duration-200 hover:bg-secondary">
+              <button className="flex items-center gap-2.5 rounded-xl px-1.5 py-1 transition-colors duration-200 hover:bg-secondary data-[state=open]:bg-secondary">
                 <Avatar className="h-9 w-9">
                   <AvatarFallback className="bg-navy text-xs font-semibold text-primary-foreground">
                     {iniciales(usuario.nombre)}
