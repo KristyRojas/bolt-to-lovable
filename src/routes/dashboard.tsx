@@ -33,9 +33,9 @@ import {
 export const Route = createFileRoute('/dashboard')({
   head: () => ({
     meta: [
-      { title: 'Dashboard de percepción — PercepciónEMI' },
+      { title: 'Dashboard de percepción — EMI-INSIGHT' },
       { name: 'description', content: 'Indicadores visuales de percepción institucional por polaridad y factor.' },
-      { property: 'og:title', content: 'Dashboard de percepción — PercepciónEMI' },
+      { property: 'og:title', content: 'Dashboard de percepción — EMI-INSIGHT' },
       { property: 'og:description', content: 'Indicadores visuales de percepción institucional por polaridad y factor.' },
       { property: 'og:type', content: 'website' },
       { name: 'twitter:card', content: 'summary' },

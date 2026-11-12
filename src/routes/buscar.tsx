@@ -28,9 +28,9 @@ import { getAnalisisConsolidado, fuentesDisponibles, type OpinionAnalizada } fro
 export const Route = createFileRoute('/buscar')({
   head: () => ({
     meta: [
-      { title: 'Buscar y filtrar opiniones — PercepciónEMI' },
+      { title: 'Buscar y filtrar opiniones — EMI-INSIGHT' },
       { name: 'description', content: 'Explore el corpus de opiniones con filtros por fuente, polaridad y factor.' },
-      { property: 'og:title', content: 'Buscar y filtrar opiniones — PercepciónEMI' },
+      { property: 'og:title', content: 'Buscar y filtrar opiniones — EMI-INSIGHT' },
       { property: 'og:description', content: 'Explore el corpus de opiniones con filtros por fuente, polaridad y factor.' },
       { property: 'og:type', content: 'website' },
       { name: 'twitter:card', content: 'summary' },

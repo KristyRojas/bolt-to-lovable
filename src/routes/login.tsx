@@ -11,9 +11,9 @@ import { Label } from '@/components/ui/label';
 export const Route = createFileRoute('/login')({
   head: () => ({
     meta: [
-      { title: 'Iniciar sesión — PercepciónEMI' },
+      { title: 'Iniciar sesión — EMI-INSIGHT' },
       { name: 'description', content: 'Acceso al sistema de percepción institucional de la EMI-UALP.' },
-      { property: 'og:title', content: 'Iniciar sesión — PercepciónEMI' },
+      { property: 'og:title', content: 'Iniciar sesión — EMI-INSIGHT' },
       { property: 'og:description', content: 'Acceso al sistema de percepción institucional de la EMI-UALP.' },
       { property: 'og:type', content: 'website' },
       { name: 'twitter:card', content: 'summary' },

@@ -15,9 +15,9 @@ import type { Rol } from '@/types';
 export const Route = createFileRoute('/pln')({
   head: () => ({
     meta: [
-      { title: 'Análisis PLN — PercepciónEMI' },
+      { title: 'Análisis PLN — EMI-INSIGHT' },
       { name: 'description', content: 'Preprocesamiento, clasificación BETO y modelado BERTopic de opiniones.' },
-      { property: 'og:title', content: 'Análisis PLN — PercepciónEMI' },
+      { property: 'og:title', content: 'Análisis PLN — EMI-INSIGHT' },
       { property: 'og:description', content: 'Preprocesamiento, clasificación BETO y modelado BERTopic de opiniones.' },
       { property: 'og:type', content: 'website' },
       { name: 'twitter:card', content: 'summary' },
