@@ -152,7 +152,9 @@ export function Captcha({
 
   return (
     <div className={compacto ? 'space-y-1.5' : 'space-y-2'}>
-      <Label htmlFor="captcha">Código de verificación</Label>
+      <Label htmlFor="captcha" className={compacto ? 'text-xs' : undefined}>
+        Código de verificación
+      </Label>
       <div className={cn('flex items-center', compacto ? 'gap-2' : 'gap-3')}>
         <canvas
           ref={canvasRef}
