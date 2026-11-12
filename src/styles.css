@@ -121,7 +121,6 @@
 
   --skeleton-a: oklch(0.936 0.012 264.5);
   --skeleton-b: oklch(0.969 0.007 260.7);
-  --login-end: oklch(0.35 0.096 255.6);
   --login-panel: oklch(0.984 0.003 247.9);
   --login-overlay-from: oklch(0.264 0.068 255.3 / 0.92);
   --login-overlay-to: oklch(0.316 0.085 257.8 / 0.8);
@@ -275,8 +274,3 @@
 /* Toasts */
 .toast-success { border-left: 4px solid var(--sentiment-positive); }
 .toast-error { border-left: 4px solid var(--sentiment-negative); }
-
-/* Fondo de login */
-.login-gradient {
-  background: linear-gradient(135deg, var(--emi-navy-dark) 0%, var(--emi-navy) 50%, var(--login-end) 100%);
-}
