@@ -11,12 +11,6 @@ const TAMANOS: Record<Tamano, string> = {
   lg: 'h-28 w-28',
 };
 
-const TEXTO_PLACEHOLDER: Record<Tamano, string> = {
-  sm: 'text-[7px]',
-  md: 'text-[9px]',
-  lg: 'text-xs',
-};
-
 // Las imágenes se leen de src/config/branding.ts.
 // Para reemplazarlas, copie sus archivos en /public/images/ con el mismo nombre.
 const FUENTES: Record<Variante, { src: string; alt: string; placeholder: string }> = {
@@ -60,14 +54,14 @@ export function BrandLogo({
         role="img"
         aria-label={`${fuente.alt} (pendiente de reemplazar)`}
         className={cn(
-          'brand-placeholder flex shrink-0 items-center justify-center rounded-xl border-2 border-dashed p-1 text-center font-semibold uppercase leading-tight tracking-wide',
+          'brand-placeholder @container flex shrink-0 items-center justify-center rounded-xl border-2 border-dashed p-1 text-center font-semibold uppercase leading-tight tracking-wide',
           tone === 'dark' ? 'brand-placeholder-dark' : 'brand-placeholder-light',
           TAMANOS[size],
-          TEXTO_PLACEHOLDER[size],
           className
         )}
       >
-        {fuente.placeholder}
+        {/* El texto escala con el tamaño del recuadro */}
+        <span className="text-[clamp(6px,14cqw,12px)]">{fuente.placeholder}</span>
       </div>
     );
   }
