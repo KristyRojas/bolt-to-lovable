@@ -166,8 +166,10 @@ export function Captcha({
           onClick={() => regenerar()}
           disabled={disabled}
           aria-label="Refrescar: generar un nuevo código"
-          className={cn('inline-flex items-center gap-1.5 rounded-lg border bg-card px-3', compacto ? 'h-11' : 'h-10')}
-          data-x=" text-sm font-medium text-foreground transition-colors duration-200 hover:bg-secondary disabled:opacity-50"
+          className={cn(
+            'inline-flex items-center gap-1.5 rounded-lg border bg-card px-3 text-sm font-medium text-foreground transition-colors duration-200 hover:bg-secondary disabled:opacity-50',
+            compacto ? 'h-11' : 'h-10'
+          )}
         >
           <RefreshCw className="h-4 w-4" />
           <span className="hidden sm:inline">Refrescar</span>
@@ -186,6 +188,7 @@ export function Captcha({
           aria-invalid={!!error}
           aria-describedby="captcha-ayuda"
           className={cn(
+            compacto && 'h-11',
             'pr-10 font-mono uppercase tracking-[0.3em] placeholder:font-sans placeholder:normal-case placeholder:tracking-normal',
             valido && 'border-sentiment-positive',
             error && 'border-destructive'
