@@ -256,7 +256,7 @@ function LoginPage() {
                   disabled={bloqueado || enviando}
                 />
 
-                <div className="flex items-center justify-between gap-3 pt-1">
+                <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 pt-1">
                   <label className="flex cursor-pointer items-center gap-2 whitespace-nowrap text-sm text-foreground">
                     <Checkbox checked={recordar} onCheckedChange={(v) => setRecordar(v === true)} />
                     Recordar usuario
