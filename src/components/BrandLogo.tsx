@@ -11,6 +11,13 @@ const TAMANOS: Record<Tamano, string> = {
   lg: 'h-28 w-28',
 };
 
+// Los logos reales son anchos: se fija la altura y el ancho queda libre.
+const TAMANOS_IMG: Record<Tamano, string> = {
+  sm: 'h-9 w-auto',
+  md: 'h-12 w-auto',
+  lg: 'h-28 w-auto',
+};
+
 // Las imágenes se leen de src/config/branding.ts.
 // Para reemplazarlas, copie sus archivos en /public/images/ con el mismo nombre.
 const FUENTES: Record<Variante, { src: string; alt: string; placeholder: string }> = {
@@ -72,7 +79,7 @@ export function BrandLogo({
       src={fuente.src}
       alt={fuente.alt}
       onError={() => setFallo(true)}
-      className={cn('shrink-0 object-contain', TAMANOS[size], className)}
+      className={cn('shrink-0 object-contain', TAMANOS_IMG[size], className)}
     />
   );
 }

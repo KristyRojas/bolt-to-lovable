@@ -32,7 +32,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { BrandLogo } from '@/components/BrandLogo';
 import { branding } from '@/config/branding';
 import { ROL_LABEL } from '@/types';
 import { RolBadge } from './RolBadge';
@@ -74,11 +73,15 @@ export function AppHeader({ onMenu }: { onMenu: () => void }) {
           <Menu className="h-5 w-5" />
         </Button>
 
-        <div className="flex min-w-0 items-center gap-3">
-          <BrandLogo variant="emi" size="sm" />
-          <div className="hidden min-w-0 leading-tight sm:block">
-            <p className="truncate text-sm font-semibold text-navy">{branding.institutionNameShort}</p>
-            <p className="truncate text-[11px] text-muted-foreground">
+        <div className="flex shrink-0 items-center gap-3">
+          <img
+            src={branding.logoEmiCompact}
+            alt={`Logo de la ${branding.institutionName}`}
+            className="h-11 w-auto shrink-0 object-contain"
+          />
+          <div className="hidden leading-tight sm:block">
+            <p className="text-sm font-semibold text-navy">{branding.institutionNameShort}</p>
+            <p className="text-xs text-muted-foreground">
               {branding.institutionUnit} · {branding.institutionShort}
             </p>
           </div>
