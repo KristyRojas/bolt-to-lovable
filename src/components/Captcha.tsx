@@ -203,7 +203,9 @@ export function Captcha({
       </div>
       <div id="captcha-ayuda" className="flex items-center justify-between gap-3 text-xs" aria-live="polite">
         {error ? (
-          <span className="font-medium text-destructive">{error}. Se generó un nuevo código.</span>
+          <span className="font-medium text-destructive">
+            {error}. {compacto ? 'Se generó otro.' : 'Se generó un nuevo código.'}
+          </span>
         ) : valido ? (
           <span className="font-medium text-sentiment-positive">Código verificado</span>
         ) : (
@@ -215,7 +217,7 @@ export function Captcha({
           disabled={disabled}
           className="shrink-0 text-accent underline-offset-2 hover:underline disabled:opacity-50"
         >
-          Generar otro código
+          {compacto ? 'Otro código' : 'Generar otro código'}
         </button>
       </div>
     </div>
