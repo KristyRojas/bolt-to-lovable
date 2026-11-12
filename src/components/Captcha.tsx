@@ -15,15 +15,15 @@ import {
   generarCodigoCaptcha,
 } from '@/lib/login-seguridad';
 
-const ANCHO = 180;
-const ALTO = 56;
+const TAMANO_NORMAL = { ancho: 180, alto: 56 };
+const TAMANO_COMPACTO = { ancho: 150, alto: 44 };
 
 function leerColor(variable: string, respaldo: string): string {
   const valor = getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
   return valor || respaldo;
 }
 
-function dibujar(canvas: HTMLCanvasElement, codigo: string) {
+function dibujar(canvas: HTMLCanvasElement, codigo: string, ANCHO: number, ALTO: number) {
   const dpr = window.devicePixelRatio || 1;
   canvas.width = ANCHO * dpr;
   canvas.height = ALTO * dpr;
@@ -58,7 +58,7 @@ function dibujar(canvas: HTMLCanvasElement, codigo: string) {
   ctx.textBaseline = 'middle';
   ctx.textAlign = 'center';
   codigo.split('').forEach((caracter, i) => {
-    const tamano = 24 + Math.random() * 8;
+    const tamano = (ALTO / 56) * (24 + Math.random() * 8);
     ctx.save();
     ctx.globalAlpha = 0.9;
     ctx.translate(paso * (i + 1) + (Math.random() * 8 - 4), ALTO / 2 + (Math.random() * 10 - 5));
@@ -92,6 +92,7 @@ export function Captcha({
   onIncorrecto,
   reinicio = 0,
   disabled = false,
+  compacto = false,
 }: {
   onValidChange: (isValid: boolean) => void;
   /** Se llama cuando el código ingresado es incorrecto. */
@@ -99,7 +100,10 @@ export function Captcha({
   /** Cambie este número para generar un captcha nuevo desde fuera. */
   reinicio?: number;
   disabled?: boolean;
+  /** Versión reducida (150x44) para formularios compactos. Solo cambia la presentación. */
+  compacto?: boolean;
 }) {
+  const { ancho, alto } = compacto ? TAMANO_COMPACTO : TAMANO_NORMAL;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const avisarValidez = useRef(onValidChange);
   avisarValidez.current = onValidChange;
@@ -122,8 +126,8 @@ export function Captcha({
   }, [reinicio, regenerar]);
 
   useEffect(() => {
-    if (codigo && canvasRef.current) dibujar(canvasRef.current, codigo);
-  }, [codigo]);
+    if (codigo && canvasRef.current) dibujar(canvasRef.current, codigo, ancho, alto);
+  }, [codigo, ancho, alto]);
 
   function onChange(texto: string) {
     const limpio = texto.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, CAPTCHA_LONGITUD);
@@ -147,22 +151,23 @@ export function Captcha({
   }
 
   return (
-    <div className="space-y-2">
+    <div className={compacto ? 'space-y-1.5' : 'space-y-2'}>
       <Label htmlFor="captcha">Código de verificación</Label>
-      <div className="flex items-center gap-3">
+      <div className={cn('flex items-center', compacto ? 'gap-2' : 'gap-3')}>
         <canvas
           ref={canvasRef}
           role="img"
           aria-label="Imagen de verificación con un código de 5 caracteres"
-          className="captcha-canvas h-14 w-[180px] shrink-0 rounded-lg border"
-          style={{ width: ANCHO, height: ALTO }}
+          className="captcha-canvas shrink-0 rounded-lg border"
+          style={{ width: ancho, height: alto }}
         />
         <button
           type="button"
           onClick={() => regenerar()}
           disabled={disabled}
           aria-label="Refrescar: generar un nuevo código"
-          className="inline-flex h-10 items-center gap-1.5 rounded-lg border bg-card px-3 text-sm font-medium text-foreground transition-colors duration-200 hover:bg-secondary disabled:opacity-50"
+          className={cn('inline-flex items-center gap-1.5 rounded-lg border bg-card px-3', compacto ? 'h-11' : 'h-10')}
+          data-x=" text-sm font-medium text-foreground transition-colors duration-200 hover:bg-secondary disabled:opacity-50"
         >
           <RefreshCw className="h-4 w-4" />
           <span className="hidden sm:inline">Refrescar</span>
