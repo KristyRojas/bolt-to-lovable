@@ -113,7 +113,7 @@ export function AppSidebar({
           )}
         </div>
         {!colapsado && (
-          <div className="mt-4 flex items-center gap-3 px-1">
+          <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 px-1">
             <span className="whitespace-nowrap text-[10px] uppercase tracking-[0.12em] text-sidebar-muted">
               Respaldado por
             </span>
@@ -121,7 +121,7 @@ export function AppSidebar({
             <img
               src={branding.logoEmiCompactWhite}
               alt={`Logo de la ${branding.institutionName}`}
-              className="h-9 w-auto shrink-0 object-contain"
+              className="h-9 w-auto max-w-full object-contain"
             />
             <span className="whitespace-nowrap text-xs font-semibold">{branding.institutionShort}</span>
           </div>

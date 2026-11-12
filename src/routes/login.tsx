@@ -174,7 +174,7 @@ function LoginPage() {
             variant="system"
             size="lg"
             tone="dark"
-            className="h-[clamp(48px,9vh,96px)] w-[clamp(48px,9vh,96px)] short:h-[clamp(40px,7vh,64px)] short:w-[clamp(40px,7vh,64px)]"
+            className="h-[clamp(48px,9vh,96px)] w-auto short:h-[clamp(40px,7vh,64px)]"
           />
           <div>
             <h1 className="text-[clamp(2rem,3.6vw,3.5rem)] font-bold leading-none tracking-[0.12em]">
@@ -228,7 +228,7 @@ function LoginPage() {
             <div aria-hidden className="login-card-stripe absolute inset-x-0 top-0 h-[3px]" />
 
             <div className="flex flex-col items-center text-center">
-              <BrandLogo variant="system" size="md" className="h-[clamp(32px,6vh,52px)] w-[clamp(32px,6vh,52px)]" />
+              <BrandLogo variant="system" size="md" className="h-[clamp(32px,6vh,52px)] w-auto" />
               <h2 className="mt-[clamp(0.4rem,1.2vh,0.75rem)] text-xl font-semibold tracking-tight text-navy xl:text-2xl">
                 Iniciar sesión
               </h2>
