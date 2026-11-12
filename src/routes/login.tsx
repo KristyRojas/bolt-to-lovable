@@ -154,46 +154,44 @@ function LoginPage() {
         className="login-hero relative hidden h-full min-h-0 flex-col justify-between overflow-hidden p-[clamp(1.5rem,4.5vh,3.5rem)] text-primary-foreground lg:flex"
         style={{ '--login-bg': `url("${branding.loginBackground}")` } as CSSProperties}
       >
-        {/* Decoración: anillos difuminados y línea dorada del borde derecho */}
-        <div aria-hidden className="login-ring pointer-events-none absolute -right-32 -top-32 h-[28rem] w-[28rem] rounded-full" />
-        <div aria-hidden className="login-ring pointer-events-none absolute -bottom-40 -left-24 h-[32rem] w-[32rem] rounded-full" />
+        {/* Borde institucional */}
         <div aria-hidden className="login-gold-edge pointer-events-none absolute inset-y-0 right-0 w-px" />
 
         {/* 1. ARRIBA */}
         <div className="login-enter relative">
-          <img
-            src={branding.logoEmiWhite}
-            alt={`Logo de la ${branding.institutionName}`}
-            className="h-[clamp(64px,10vh,96px)] w-auto object-contain"
-          />
+          <BrandLogo variant="emiColorDark" size="lg" tone="dark" className="h-[clamp(64px,10vh,96px)] w-auto" />
         </div>
 
         {/* 2. CENTRO */}
         <div className="login-enter login-enter-delay relative flex max-w-xl flex-col gap-[clamp(0.75rem,2.4vh,1.75rem)]">
           <BrandLogo
-            variant="system"
+            variant="systemLight"
             size="lg"
             tone="dark"
-            className="h-[clamp(48px,9vh,96px)] w-auto short:h-[clamp(40px,7vh,64px)]"
+            className="login-system-logo h-[clamp(64px,10vh,96px)] w-auto self-start"
           />
           <div>
-            <h1 className="text-[clamp(2rem,3.6vw,3.5rem)] font-bold leading-none tracking-[0.12em]">
+            <h1 className="sr-only">
               {branding.systemName}
             </h1>
             <div className="mt-[clamp(0.6rem,1.8vh,1rem)] h-1 w-12 rounded-full bg-gold" />
           </div>
-          <p className="line-clamp-2 max-w-lg text-[clamp(0.9rem,1.15vw,1.1rem)] leading-relaxed text-primary-foreground/80 shorter:hidden">
+          <p className="login-system-description max-w-lg text-lg font-medium leading-relaxed text-primary-foreground/90">
             {branding.systemTagline}
           </p>
-          <ul className="grid grid-cols-2 gap-x-6 gap-y-[clamp(0.6rem,2vh,1.1rem)] pt-[clamp(0rem,1vh,0.5rem)] short:hidden">
+          <p className="max-w-lg border-l-2 border-gold pl-3 text-sm leading-relaxed text-primary-foreground/70">
+            {branding.institutionNameShort}<br />
+            {branding.institutionUnit} · {branding.location}
+          </p>
+          <ul className="grid grid-cols-2 gap-x-6 gap-y-[clamp(0.6rem,2vh,1.1rem)] pt-[clamp(0rem,1vh,0.5rem)] shorter:hidden">
             {CARACTERISTICAS.map(({ icono: Icono, titulo, detalle }) => (
               <li key={titulo} className="flex min-w-0 items-center gap-3">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/15 text-gold ring-1 ring-gold/30">
                   <Icono className="h-[18px] w-[18px]" />
                 </span>
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold">{titulo}</p>
-                  <p className="truncate text-xs text-primary-foreground/70">{detalle}</p>
+                   <p className="text-sm font-semibold leading-snug">{titulo}</p>
+                   <p className="text-xs leading-snug text-primary-foreground/70">{detalle}</p>
                 </div>
               </li>
             ))}
@@ -210,7 +208,6 @@ function LoginPage() {
 
       {/* PANEL DERECHO — formulario */}
       <main className="login-form-panel relative flex h-full min-h-0 flex-col items-center justify-center gap-[clamp(0.6rem,2vh,1.25rem)] overflow-y-auto overflow-x-hidden px-5 py-[clamp(0.75rem,2.5vh,2rem)] sm:px-8">
-        <div aria-hidden className="login-blob pointer-events-none absolute left-1/2 top-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 rounded-full" />
 
         {/* Mini encabezado (<1024px): logos pequeños */}
         <div className="relative flex w-full max-w-[420px] items-center justify-center gap-3 lg:hidden">
