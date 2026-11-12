@@ -28,3 +28,10 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- App data (users, sources, reports, NLP results) lives in browser localStorage via `src/services/*`; pages talk only to contexts/services so a future backend swap touches services alone. Why: ported as-is from the Bolt prototype, which had no backend.
+- PDF generation (`src/lib/pdf.ts`, jsPDF) is loaded with dynamic `import()` inside click handlers, never statically from a route. Why: jsPDF is browser-only and routes are server-rendered.
+- Pages behind login wrap their content in `AppLayout` (AuthGuard + role-filtered sidebar). Why: auth state is read from localStorage after hydration, so guarding happens client-side.
+- Report content for PDF, CSV and the on-screen preview comes from one builder (`src/lib/reporte-datos.ts`) over the filtered opinions from `analisis.service`. Why: every output shows the same numbers for the same source and period.
