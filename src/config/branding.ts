@@ -22,6 +22,9 @@ export const branding = {
 
   // ⬇ Reemplace estos archivos en /public/images/ para usar los logos reales.
   logoEmi: '/images/emi-logo.png', // Logo de la Escuela Militar de Ingeniería
+  logoEmiCompact: '/images/emi-logo-compact.png', // Logo EMI compacto (sin leyenda)
+  logoEmiCompactWhite: '/images/emi-logo-compact-white.png', // Compacto blanco para fondos oscuros
+  logoEmiWhite: '/images/emi-logo-white.png', // Logo EMI completo en blanco (login)
   logoSystem: '/images/emi-insight-logo.png', // Logo del sistema EMI-INSIGHT
   loginBackground: '/images/login-bg.jpg', // Fotografía institucional del login
 } as const;

@@ -117,10 +117,12 @@ export function AppSidebar({
             <span className="whitespace-nowrap text-[10px] uppercase tracking-[0.12em] text-sidebar-muted">
               Respaldado por
             </span>
-            <span className="rounded-lg bg-card p-1">
-              {/* Logo EMI sobre fondo blanco para que se vea sobre el azul marino */}
-              <BrandLogo variant="emi" size="sm" className="h-7 w-7" />
-            </span>
+            {/* Logo EMI compacto en blanco, visible sobre el azul marino */}
+            <img
+              src={branding.logoEmiCompactWhite}
+              alt={`Logo de la ${branding.institutionName}`}
+              className="h-9 w-auto shrink-0 object-contain"
+            />
             <span className="whitespace-nowrap text-xs font-semibold">{branding.institutionShort}</span>
           </div>
         )}

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { BrandLogo } from '@/components/BrandLogo';
 import { branding, versionNumero } from '@/config/branding';
 import {
   Dialog,
@@ -38,7 +37,11 @@ export function AppFooter() {
     <footer className="border-t bg-card">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-5 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-10">
         <div className="flex items-start gap-3">
-          <BrandLogo variant="emi" size="sm" className="footer-logo" />
+          <img
+            src={branding.logoEmiCompact}
+            alt={`Logo de la ${branding.institutionName}`}
+            className="footer-logo h-8 w-auto shrink-0 object-contain"
+          />
           <p className="max-w-xl text-xs leading-relaxed text-muted-foreground">
             © {branding.year} {branding.systemName} · {branding.institutionName} —{' '}
             {branding.institutionShort}. Todos los derechos reservados.

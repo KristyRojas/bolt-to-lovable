@@ -160,14 +160,12 @@ function LoginPage() {
         <div aria-hidden className="login-gold-edge pointer-events-none absolute inset-y-0 right-0 w-px" />
 
         {/* 1. ARRIBA */}
-        <div className="login-enter relative flex w-fit items-center gap-3 rounded-2xl border border-primary-foreground/20 bg-primary-foreground/10 py-2 pl-2 pr-4 backdrop-blur-md">
-          <BrandLogo variant="emi" size="sm" tone="dark" className="h-[clamp(36px,5.5vh,44px)] w-[clamp(36px,5.5vh,44px)]" />
-          <div className="text-xs leading-snug">
-            <p className="font-semibold">{branding.institutionNameShort}</p>
-            <p className="text-primary-foreground/75">
-              {branding.institutionUnit} · {branding.institutionShort}
-            </p>
-          </div>
+        <div className="login-enter relative">
+          <img
+            src={branding.logoEmiWhite}
+            alt={`Logo de la ${branding.institutionName}`}
+            className="h-[clamp(64px,10vh,96px)] w-auto object-contain"
+          />
         </div>
 
         {/* 2. CENTRO */}
